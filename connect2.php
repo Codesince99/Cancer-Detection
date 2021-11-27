@@ -28,3 +28,47 @@
 		$conn->close();
 	}
 ?>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Using single SQL</title>
+<style>
+table,td,th
+{
+ padding:10px;
+ border-collapse:collapse;
+ font-family:Georgia, "Times New Roman", Times, serif;
+ border:solid #ddd 2px;
+}
+</style>
+</head>
+<body>
+<table align="center" border="1" width="100%">
+<tr>
+<th>patient id</th>
+
+<th>result</th>
+</tr>
+<?php
+$dbhandle=mysqli_connect("localhost","root");
+mysqli_select_db($dbhandle,"test2");
+$res=mysqli_query($dbhandle,"SELECT * from result where patient_id='".$patientid."'");
+
+
+while($row=mysqli_fetch_assoc($res))
+{
+ ?>
+    <tr>
+    <td><p><?php echo $row['patient_id']; ?></p></td>
+   
+    <td><p><?php echo $row['result']; ?></p></td>
+    </tr>
+    <?php
+}
+?>
+</table>
+</body>
+</html>
+
+
