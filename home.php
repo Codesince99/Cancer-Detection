@@ -1,3 +1,19 @@
+<?php
+session_start();
+if (isset($_SESSION["username"])) {
+    $username = $_SESSION["username"];
+    session_write_close();
+} else {
+    // since the username is not set in session, the user is not-logged-in
+    // he is trying to access this page unauthorized
+    // so let's clear all session variables and redirect him to index
+    session_unset();
+    session_write_close();
+    $url = "./index.php";
+    header("Location: $url");
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +75,7 @@
               <li class="scroll-to-section"><a href="#about">About us</a></li>
               <li class="scroll-to-section"><a href="#feedback">feedback</a></li>
               <li class="scroll-to-section"><a href="#">Contact us</a></li>
-              <li><div class="gradient-button"><a href="index.php"><i class="fa fa-sign-in-alt"></i> Sign In Now</a></div></li> 
+              <li><div class="gradient-button"><a href="logout.php"><i class="fa fa-sign-in-alt"></i> Logout</a></div></li> 
             </ul>        
             <!-- ***** Menu End ***** -->
           </nav>
@@ -77,12 +93,12 @@
               <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
                 <div class="row">
                   <div class="col-lg-12" style="color: white; padding-bottom: 80px;">
-                    <h2>Cordial Care</h2>
+                    <h2>Cancer Detection</h2>
                     <!-- <p style="color: white;">description</p> -->
                   </div>
                   <div class="col-lg-12">
                     <div class="white-button first-button scroll-to-section">
-                      <a href="#">Test Now <i class="fab fa-google-play"></i></a>
+                      <a href="index_me.php">Test Now <i class="fab fa-google-play"></i></a>
                     </div>
                   </div>
                 </div>
@@ -233,3 +249,14 @@
   <script src="assets/js/custom.js"></script>
 </body>
 </html>
+    <!-- <img src="./assets/bg.jpg" alt=""> -->
+	<!--<div class="phppot-container" >
+        <div class="col btn btn-danger" style="margin-top:5% !important;"> User Dashboard</div><div class="page-header">
+		</div>
+		<div class="page-content jumbotron" style="  background-color: red;
+  background-image: linear-gradient(to right, darkgoldenrod , purple);">
+  <h4 style="color:white; font-weight:bold;">Welcome to Account <?php echo $username;?></h4></div>
+  <span class="login-signup btn btn-warning"><a href="logout.php" style="color:white">Logout</a></span>
+	</div>-->
+
+

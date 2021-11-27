@@ -1,21 +1,21 @@
 <?php
     session_start(); 
  
+  $username = $_SESSION["username"];
 	$firstName = $_POST['firstName'];
 	$lastName = $_POST['lastName'];
 	$gender = $_POST['gender'];
 	$email = $_POST['email'];
 	$number = $_POST['number'];
  
-
 	// Database connection
 	$conn = new mysqli('localhost','root','','test2');
 	if($conn->connect_error){
 		echo "$conn->connect_error";
 		die("Connection Failed : ". $conn->connect_error);
 	} else {
-		$stmt = $conn->prepare("insert into registration(firstName, lastName, gender, email,number) values(?, ?, ?, ?,?)");
-		$stmt->bind_param("ssssi", $firstName, $lastName, $gender, $email,  $number);
+		$stmt = $conn->prepare("insert into registration(DoctorName,firstName, lastName, gender, email,number) values(?, ?,?, ?, ?,?)");
+		$stmt->bind_param("sssssi",$username, $firstName, $lastName, $gender, $email,  $number);
        
 		$execval = $stmt->execute();
 		  
@@ -31,7 +31,7 @@
 <html>
   <head>
     <title>Patient details</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="later/patient details/css/bootstrap.css" />
   </head>
   <body style="background-image: url('bg.jpg');">
     <div class="container">

@@ -46,12 +46,12 @@ y_predict=classifier_naive.predict(x_test)
 
 from sklearn.metrics import confusion_matrix
 c_naive=confusion_matrix(y_test,y_predict)
-#print(c_naive)
+print(c_naive)
 
 from sklearn.metrics import classification_report
-#print(classification_report(y_test,y_predict))
+print(classification_report(y_test,y_predict))
 Accuracy_naive=sum(np.diag(c_naive))/(np.sum(c_naive))
-Accuracy_naive
+print(Accuracy_naive)
 
 ##### our data set
 import mysql.connector
@@ -87,7 +87,7 @@ for row in records :
 print(result)
 
 cursor=conn.cursor()
-sql="""insert into result (id,patientid,clump, unifsize, unifshape,margadh,singepisize,barenuc,BlandChrom,NormNucl,Mit,result) values (%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s,%s) 
+sql="""insert into result (id,patient_id,clump, unifsize, unifshape,margadh,singepisize,barenuc,BlandChrom,NormNucl,Mit,result) values (%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s,%s) 
 ON DUPLICATE KEY UPDATE clump = VALUES(clump), unifsize = VALUES(unifsize), unifshape = VALUES(unifshape), margadh = VALUES(margadh), singepisize = VALUES(singepisize), barenuc = VALUES(barenuc), BlandChrom = VALUES(BlandChrom), NormNucl = VALUES(NormNucl), Mit = VALUES(Mit),result = VALUES(result)"""
 val=result
 
